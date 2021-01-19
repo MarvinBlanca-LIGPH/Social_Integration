@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.socialintegration.R
 import com.example.socialintegration.databinding.ActivityFacebookUserInfoBinding
-import kotlinx.android.synthetic.main.activity_facebook_user_info.*
 
 class FacebookUserInfoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFacebookUserInfoBinding
@@ -26,7 +25,7 @@ class FacebookUserInfoActivity : AppCompatActivity() {
         binding.userInfo = viewModel
         binding.lifecycleOwner = this
 
-        facebookLoginButton.setReadPermissions(
+        binding.facebookLoginButton.setReadPermissions(
             arrayListOf(
                 "public_profile",
                 "email",
