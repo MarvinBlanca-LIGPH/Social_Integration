@@ -5,4 +5,7 @@
     <string name="login">Login</string>
     <string name="logout">Logout</string>
     <string name="share">Share</string>
+    <string name="session_started">Session started</string>
+    <string name="session_closed">Session closed</string>
+    <string name="not_subscribed">None of your friends subscribed to this app.</string>
 </resources>

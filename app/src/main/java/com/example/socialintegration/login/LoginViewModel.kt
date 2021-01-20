@@ -19,10 +19,12 @@ class LoginViewModel(
         get() = _isOpened
 
     private fun onSessionChanged(session: Session?, state: SessionState?, exception: Exception?) {
-        if (state!!.isOpened) {
-            _isOpened.value = true
-        } else if (state.isClosed) {
-            _isOpened.value = false
+        state?.let {
+            if (it.isOpened) {
+                _isOpened.value = true
+            } else if (it.isClosed) {
+                _isOpened.value = false
+            }
         }
     }
 

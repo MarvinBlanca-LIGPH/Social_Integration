@@ -1,13 +1,14 @@
-package com.example.socialintegration.userInfo
+package com.example.socialintegration.friendInfo
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.*
+import com.example.socialintegration.R
 import com.facebook.*
 
-class UserInfoViewModel(
+class FriendInfoViewModel(
     savedInstanceState: Bundle?,
-    activity: FacebookUserInfoActivity
+    private val activity: FacebookFriendInfoActivity
 ) : ViewModel() {
     var uiHelper: UiLifecycleHelper
     private val callback: Session.StatusCallback =
@@ -20,6 +21,9 @@ class UserInfoViewModel(
     private val _userDetails = MutableLiveData<String>()
     val userDetails
         get() = _userDetails
+    private val _friendDetails = MutableLiveData<String>()
+    val friendDetails
+        get() = _friendDetails
     private val _userPhoto = MutableLiveData<String>()
     val userPhoto
         get() = _userPhoto
@@ -29,10 +33,12 @@ class UserInfoViewModel(
             if (it.isOpened) {
                 _isOpened.value = true
                 getUserDetails(session)
+                getFriendDetails(session)
             } else if (it.isClosed) {
                 _isOpened.value = false
                 _userDetails.value = ""
                 _userPhoto.value = ""
+                _friendDetails.value = ""
             }
         }
     }
@@ -52,6 +58,21 @@ class UserInfoViewModel(
                 _userDetails.value = "You are logged in as $name"
             }
         }.executeAsync()
+    }
+
+    private fun getFriendDetails(session: Session?) {
+        val request = Request.newMyFriendsRequest(session) { graphUsers, _ ->
+            graphUsers.forEach {
+                val id = it.id
+                val name = it.name
+
+                _friendDetails.value = "id = $id name = $name"
+            }
+        }
+
+        if (request.graphObject == null)
+            _friendDetails.value =
+                activity.resources.getString(R.string.not_subscribed)
     }
 
     fun resume() {

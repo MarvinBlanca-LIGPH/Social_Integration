@@ -1,30 +1,29 @@
-package com.example.socialintegration.userInfo
+package com.example.socialintegration.friendInfo
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.*
 import com.bumptech.glide.Glide
 import com.example.socialintegration.R
-import com.example.socialintegration.databinding.ActivityFacebookUserInfoBinding
+import com.example.socialintegration.databinding.ActivityFacebookFriendInfoBinding
 
-class FacebookUserInfoActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityFacebookUserInfoBinding
-    private lateinit var viewModel: UserInfoViewModel
+class FacebookFriendInfoActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityFacebookFriendInfoBinding
+    private lateinit var viewModel: FriendInfoViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_facebook_user_info)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_facebook_friend_info)
 
-        val factory = UserInfoViewModelFactory(savedInstanceState, this)
-        viewModel = ViewModelProvider(this, factory).get(UserInfoViewModel::class.java)
+        val factory = FriendInfoViewModelFactory(savedInstanceState, this)
+        viewModel = ViewModelProvider(this, factory).get(FriendInfoViewModel::class.java)
 
-        binding.userInfo = viewModel
+        binding.friendInfoBinding = viewModel
         binding.lifecycleOwner = this
-
         binding.facebookLoginButton.setReadPermissions(
             arrayListOf(
                 "public_profile",

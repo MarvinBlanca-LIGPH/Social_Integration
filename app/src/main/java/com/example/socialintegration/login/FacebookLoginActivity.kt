@@ -26,9 +26,9 @@ class FacebookLoginActivity : AppCompatActivity() {
     private fun observers() {
         viewModel.isOpened.observe(this, { isOpened ->
             if (isOpened) {
-                Toast.makeText(this, "Session started", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.session_started, Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Session closed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.session_closed, Toast.LENGTH_SHORT).show()
             }
         })
     }

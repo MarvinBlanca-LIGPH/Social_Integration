@@ -1,36 +1,27 @@
-package com.example.socialintegration.userInfo
+package com.example.socialintegration.customLogin
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.*
-import com.bumptech.glide.Glide
 import com.example.socialintegration.R
-import com.example.socialintegration.databinding.ActivityFacebookUserInfoBinding
+import com.example.socialintegration.databinding.ActivityFacebookCustomLoginBinding
 
-class FacebookUserInfoActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityFacebookUserInfoBinding
-    private lateinit var viewModel: UserInfoViewModel
+class FacebookCustomLoginActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityFacebookCustomLoginBinding
+    private lateinit var viewModel: CustomLoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_facebook_user_info)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_facebook_custom_login)
 
-        val factory = UserInfoViewModelFactory(savedInstanceState, this)
-        viewModel = ViewModelProvider(this, factory).get(UserInfoViewModel::class.java)
+        val factory = CustomLoginViewModelFactory(savedInstanceState, this)
+        viewModel = ViewModelProvider(this, factory).get(CustomLoginViewModel::class.java)
 
-        binding.userInfo = viewModel
+        binding.customLoginBinding = viewModel
         binding.lifecycleOwner = this
-
-        binding.facebookLoginButton.setReadPermissions(
-            arrayListOf(
-                "public_profile",
-                "email"
-            )
-        )
 
         observers()
     }
@@ -41,17 +32,6 @@ class FacebookUserInfoActivity : AppCompatActivity() {
                 Toast.makeText(this, R.string.session_started, Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, R.string.session_closed, Toast.LENGTH_SHORT).show()
-            }
-        })
-
-        viewModel.userPhoto.observe(this, { photo ->
-            if (photo.isNotEmpty()) {
-                binding.imageView.visibility = View.VISIBLE
-                Glide.with(this)
-                    .load(viewModel.userPhoto.value)
-                    .into(binding.imageView)
-            } else {
-                binding.imageView.visibility = View.INVISIBLE
             }
         })
     }
