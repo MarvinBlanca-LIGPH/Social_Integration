@@ -8,4 +8,8 @@
     <string name="session_started">Session started</string>
     <string name="session_closed">Session closed</string>
     <string name="not_subscribed">None of your friends subscribed to this app.</string>
+    <string name="input_message">Type message here</string>
+    <string name="send_to_whats_app">Send Message to WhatsApp</string>
+    <string name="app_not_installed">WhatsApp is not installed on your phone</string>
+    <string name="send_to_specific">Send to Specific Number</string>
 </resources>
